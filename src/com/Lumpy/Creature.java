@@ -8,7 +8,7 @@ public class Creature {
 	private int axis_x;
 	private int axis_y;
 
-	public Creature(String name, int axis_x, int axis_y){
+	Creature(String name, int axis_x, int axis_y) {
 		this.name = name;
 		this.axis_x = axis_x;
 		this.axis_y = axis_y;
