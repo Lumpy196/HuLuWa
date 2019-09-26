@@ -38,6 +38,6 @@ public class Creature {
 		this.axis_y = axis_y;
 	}
 	public void checkUp(){
-		System.out.println("ÉúÎïÃû:" +name+ "×ø±êÎª:" +axis_x +axis_y);
+		System.out.println("è‘«èŠ¦å¨ƒ:" +name+ "åæ ‡ä¸º:" +axis_x +axis_y);
 	}
 }
