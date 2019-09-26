@@ -13,26 +13,31 @@ public class HuLuWa extends Human {
 		this.index = index;
 		this.color = color;
 	}
-	
+
 	public int getIndex() {
 		return index;
 	}
+
 	public void setIndex(int index) {
 		this.index = index;
 	}
+
 	public int getCounter() {
 		return counter;
 	}
+
 	public void setCounter(int counter) {
 		this.counter = counter;
 	}
-	public COLOR getColor() {
+
+	public com.Lumpy.COLOR getColor() {
 		return color;
 	}
-	public void setColor(COLOR color) {
+
+	public void setColor(com.Lumpy.COLOR color) {
 		this.color = color;
 	}
-	
+
 	public void checkUp(){
 		System.out.println("ºùÂ«ÍÞ:" +this.getName()+ "×ø±êÎª:" +this.getAxis_x() +this.getAxis_y());
 	}
