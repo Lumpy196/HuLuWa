@@ -24,8 +24,8 @@ public class Main {
         }
 
         BattleField.getBattefield();
-        int[] temp = BattleField.getFormationFromFile();
-        BattleField.initBattleField(temp, 0);
+        int[] temp = BattleField.getFormationFromFile(1);
+        BattleField.initBattleField(temp, 1);
         BattleField.getBattefield();
 
     }

@@ -43,22 +43,33 @@ public class BattleField {
     /**
      *
      */
-    public static int[] getFormationFromFile() {
+    public static int[] getFormationFromFile(int FormationKind) {
 
         try {
-            FileReader fileReader = new FileReader("res/Formation/sneakysnake.txt");
-            FileReader fileReader1 = new FileReader("res/Formation/ladder.txt");
-            FileReader fileReader2 = new FileReader("res/Formation/wildgoose.txt");
+            String filename;
+            switch (FormationKind) {
+                case 1:
+                    filename = "ladder";
+                    break;
+                case 2:
+                    filename = "sneakysnake";
+                    break;
+                case 3:
+                    filename = "wildgoose";
+                    break;
+                default:
+                    System.out.println("ÄãÊäÄãÂèÄØ£¿");
+                    filename = null;
+                    break;
+            }
+
+            FileReader fileReader = new FileReader("res/Formation/" + filename + ".txt");
 
             char[] cbuf = new char[500];
-            int b = fileReader2.read(cbuf, 0, 500);
-            fileReader2.close();
-            //System.out.println(String.valueOf(cbuf));
+            int b = fileReader.read(cbuf, 0, 500);
+            fileReader.close();
 
-
-            String string = String.valueOf(cbuf);
-
-            int result[] = StringUtils.string2Integer(string, BFMAXSIZE);
+            int result[] = StringUtils.string2Integer(String.valueOf(cbuf), BFMAXSIZE);
 
             for (int i = 0; i < result.length; i++) {
                 System.out.println(result[i]);
