@@ -21,13 +21,13 @@ public class Main {
             String goblinName = new String();
             goblinName = "" + String.valueOf(i + 1);
             goblin[i] = new Goblin(goblinName, 6, i + i % 2, 0);
-
-
         }
 
-        GenerateFormation Formation = new GenerateFormation();
-        Formation.PrintSurprise();
-    }
+        BattleField.getBattefield();
+        int[] temp = BattleField.getFormationFromFile();
+        BattleField.initBattleField(temp, 0);
+        BattleField.getBattefield();
 
+    }
 
 }
