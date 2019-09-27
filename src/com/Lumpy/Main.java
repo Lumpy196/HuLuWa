@@ -1,5 +1,8 @@
 package com.Lumpy;
 
+import java.util.Scanner;
+
+import com.Lumpy.BattleField;
 public class Main {
 
     public static void main(String[] args) {
@@ -13,20 +16,29 @@ public class Main {
         calabash[5] = new HuLuWa("ÁùÍÞ", 0, 5, 5, COLOR.BLUE);
         calabash[6] = new HuLuWa("ÆßÍÞ", 0, 6, 6, COLOR.PURPLE);
 
-        Grandpa grandpa = new Grandpa("??", 1, 3);
+        Grandpa grandpa = new Grandpa("??", 1, 3, 7);
 
-        Snake snake = new Snake("Éß¾«", 5, 4);
+        Snake snake = new Snake("Éß¾«", 5, 4, 8);
         Goblin goblin[] = new Goblin[8];
         for (int i = 0; i < 8; i++) {
             String goblinName = new String();
             goblinName = "" + String.valueOf(i + 1);
             goblin[i] = new Goblin(goblinName, 6, i + i % 2, 0);
         }
+        int a;
+        do {
+            //BattleField.getBattefield();
 
-        BattleField.getBattefield();
-        int[] temp = BattleField.getFormationFromFile(1);
-        BattleField.initBattleField(temp, 1);
-        BattleField.getBattefield();
+
+            Scanner scanner = new Scanner(System.in);
+            a = scanner.nextInt();
+            int[] temp = BattleField.getFormationFromFile(a);
+            BattleField.initBattleField(temp, 0);
+            BattleField.getBattefield();
+            BattleField.cleanBattlefield();
+
+
+        } while (a != 5);
 
     }
 

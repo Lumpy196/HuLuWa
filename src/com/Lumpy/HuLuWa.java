@@ -8,9 +8,8 @@ public class HuLuWa extends Human {
 	private int counter = 1;
 	private COLOR color;
 	public HuLuWa(String name,int axis_x, int axis_y, int index, COLOR color){
-		super(name,axis_x,axis_y);
+		super(name, axis_x, axis_y, index);
 		this.setName(name);
-		this.index = index;
 		this.color = color;
 	}
 

@@ -8,10 +8,10 @@ import java.lang.String;
 
 public class BattleField {
 
-    private static final int BFMAXSIZE = 15;
+    private static final int BFMAXSIZE = 10;
 
 
-    private static int battefield[][] = new int[BFMAXSIZE][BFMAXSIZE];
+    public static int battefield[][] = new int[BFMAXSIZE][BFMAXSIZE];
 
     public BattleField() {
         for (int axis_x = 0; axis_x < battefield.length; axis_x++)
@@ -22,6 +22,12 @@ public class BattleField {
     /**
      *
      */
+    public static void cleanBattlefield() {
+        for (int axis_x = 0; axis_x < battefield.length; axis_x++)
+            for (int axis_y = 0; axis_y < battefield[0].length; axis_y++)
+                battefield[axis_x][axis_y] = 0;
+    }
+
     public static void getBattefield() {
         for (int axis_x = 0; axis_x < battefield.length; axis_x++) {
             for (int axis_y = 0; axis_y < battefield[0].length; axis_y++) {
@@ -31,13 +37,9 @@ public class BattleField {
         }
     }
 
-    /**
-     * @param axis_x
-     * @param axis_y
-     * @param id
-     */
-    public static void setBattefield(int axis_x, int axis_y, int id) {
-        battefield[axis_x][axis_y] = id;
+
+    public static void setBattefield(Creature creature) {
+        battefield[creature.getAxis_x()][creature.getAxis_y()] = 1;
     }
 
     /**
@@ -64,17 +66,12 @@ public class BattleField {
             }
 
             FileReader fileReader = new FileReader("res/Formation/" + filename + ".txt");
-
             char[] cbuf = new char[500];
             int b = fileReader.read(cbuf, 0, 500);
             fileReader.close();
 
-            int result[] = StringUtils.string2Integer(String.valueOf(cbuf), BFMAXSIZE);
+            return StringUtils.string2Integer(String.valueOf(cbuf), BFMAXSIZE);
 
-            for (int i = 0; i < result.length; i++) {
-                System.out.println(result[i]);
-            }
-            return result;
         } catch (IOException e) {
             System.out.println("No Formation File Found!");
             e.printStackTrace();
@@ -87,7 +84,6 @@ public class BattleField {
         for (int count = 1; count < Formation.length; count++) {
             battefield[count][firstSoldier + Formation[count]] = 1;
         }
-
     }
 }
 

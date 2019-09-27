@@ -3,15 +3,25 @@ package  com.Lumpy;
 
 public class Creature {
 
+	private int index;
 	private int counter = 111;
 	private String name;
 	private int axis_x;
 	private int axis_y;
 
-	Creature(String name, int axis_x, int axis_y) {
+	Creature(String name, int axis_x, int axis_y, int index) {
 		this.name = name;
 		this.axis_x = axis_x;
 		this.axis_y = axis_y;
+		this.index = index;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public int getCounter() {
