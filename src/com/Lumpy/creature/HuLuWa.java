@@ -1,8 +1,6 @@
-package com.Lumpy;
+package com.Lumpy.creature;
 
-enum COLOR{
-	RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE
-}
+
 public class HuLuWa extends Human {
 	private int index;
 	private int counter = 1;
@@ -11,6 +9,10 @@ public class HuLuWa extends Human {
 		super(name, axis_x, axis_y, index);
 		this.setName(name);
 		this.color = color;
+	}
+
+	public enum COLOR {
+		RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE
 	}
 
 	public int getIndex() {
@@ -29,11 +31,11 @@ public class HuLuWa extends Human {
 		this.counter = counter;
 	}
 
-	public com.Lumpy.COLOR getColor() {
+	public COLOR getColor() {
 		return color;
 	}
 
-	public void setColor(com.Lumpy.COLOR color) {
+	public void setColor(COLOR color) {
 		this.color = color;
 	}
 

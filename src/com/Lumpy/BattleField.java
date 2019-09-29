@@ -1,6 +1,8 @@
 package com.Lumpy;
 
 
+import com.Lumpy.creature.Creature;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.String;
@@ -31,7 +33,7 @@ public class BattleField {
     public static void getBattefield() {
         for (int axis_x = 0; axis_x < battefield.length; axis_x++) {
             for (int axis_y = 0; axis_y < battefield[0].length; axis_y++) {
-                System.out.printf("%s ", battefield[axis_x][axis_y]);
+                System.out.printf("%s       ", battefield[axis_x][axis_y]);
             }
             System.out.println();
         }
@@ -48,7 +50,7 @@ public class BattleField {
     public static int[] getFormationFromFile(int FormationKind) {
 
         try {
-            String filename;
+            String filename = null;
             switch (FormationKind) {
                 case 1:
                     filename = "ladder";
@@ -60,8 +62,7 @@ public class BattleField {
                     filename = "wildgoose";
                     break;
                 default:
-                    System.out.println("ÄãÊäÄãÂèÄØ£¿");
-                    filename = null;
+                    System.out.println("ÄãËµÄãÂèÄØ£¿");
                     break;
             }
 

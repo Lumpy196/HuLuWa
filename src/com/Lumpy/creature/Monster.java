@@ -1,4 +1,4 @@
-package  com.Lumpy;
+package com.Lumpy.creature;
 
 public class Monster extends Creature{
 

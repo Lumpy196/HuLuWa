@@ -1,4 +1,4 @@
-package  com.Lumpy;
+package com.Lumpy.creature;
 
 
 public class Creature {
@@ -57,6 +57,6 @@ public class Creature {
 	}
 
 	public void checkUp(){
-		System.out.println("葫芦娃:" +name+ "坐标为:" +axis_x +axis_y);
+		System.out.println("葫芦娃:" + name + "坐标为:" + axis_x + axis_y);
 	}
 }
