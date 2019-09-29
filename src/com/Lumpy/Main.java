@@ -1,9 +1,11 @@
 package com.Lumpy;
 
-import java.io.FileInputStream;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import com.Lumpy.Utils.FormationUtils;
+import com.Lumpy.Utils.ScreenUtils;
 import com.Lumpy.creature.*;
 
 public class Main {
@@ -60,6 +62,12 @@ public class Main {
             Battlefield.setBattlefield(aliveMonster);
             Battlefield.printBattlefield();
             Battlefield.cleanBattlefield();
+            try {
+                ScreenUtils.screenClear();
+            } catch (AWTException e) {
+                e.getStackTrace();
+            }
+
 
 
         } while (a != 5);

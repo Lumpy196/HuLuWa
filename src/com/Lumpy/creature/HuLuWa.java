@@ -4,6 +4,7 @@ package com.Lumpy.creature;
 public class HuLuWa extends Human {
 	private int index;
 	private int counter = 1;
+	private static int health = 120;
 	private COLOR color;
 	public HuLuWa(String name,int axis_x, int axis_y, int index, COLOR color){
 		super(name, axis_x, axis_y, index);
