@@ -10,7 +10,7 @@ import com.Lumpy.creature.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, AWTException {
         // TODO Auto-generated method stub
         List<Creature> aliveHuman = new ArrayList<>();
 
@@ -51,26 +51,21 @@ public class Main {
 
         int a, b;
         do {
-            Scanner scanner = new Scanner(System.in);
-            a = scanner.nextInt();
-            b = scanner.nextInt();
-            int[] Formation1 = FormationUtils.getFormationFromFile(a, 15);
-            int[] Formation2 = FormationUtils.getFormationFromFile(b, 15);
+            //Scanner scanner = new Scanner(System.in);
+            //a = scanner.nextInt();
+            //b = scanner.nextInt();
+            int[] Formation1 = FormationUtils.getFormationFromFile(1, 15);
+            int[] Formation2 = FormationUtils.getFormationFromFile(1, 15);
             FormationUtils.setFormation(Formation1, 1, aliveHuman);
             FormationUtils.setFormation(Formation2, 15, aliveMonster);
             Battlefield.setBattlefield(aliveHuman);
             Battlefield.setBattlefield(aliveMonster);
             Battlefield.printBattlefield();
+            ScreenUtils.screenClear(200);
             Battlefield.cleanBattlefield();
-            try {
-                ScreenUtils.screenClear();
-            } catch (AWTException e) {
-                e.getStackTrace();
-            }
 
 
-
-        } while (a != 5);
+        } while (true);
 
 
     }
