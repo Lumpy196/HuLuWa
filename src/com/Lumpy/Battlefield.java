@@ -42,9 +42,11 @@ public class Battlefield {
             for (int axis_y = 0; axis_y < battlefield.length; axis_y++) {
                 if (battlefield[axis_x][axis_y] != null) {
                     System.out.printf("%s ", battlefield[axis_x][axis_y].getName());
+                } else {
+                    System.out.print("¨€¨€¨€¨€ ");
                 }
-                System.out.println();
             }
+            System.out.println();
         }
     }
 
