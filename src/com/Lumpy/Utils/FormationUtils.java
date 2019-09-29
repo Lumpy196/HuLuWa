@@ -1,7 +1,11 @@
 package com.Lumpy.Utils;
 
+import com.Lumpy.creature.Creature;
+
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 public class FormationUtils {
 
@@ -44,6 +48,17 @@ public class FormationUtils {
             System.out.println("No Formation File Found!");
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void setFormation(int[] formation, int firstSoldier, List<Creature> creatures) {
+        Iterator<Creature> iterator = creatures.iterator();
+        int count = 0;
+        while (iterator.hasNext()) {
+            Creature creature = iterator.next();
+            creature.setAxis_x(count);
+            creature.setAxis_y(firstSoldier + formation[count]);
+            count++;
         }
     }
 }
