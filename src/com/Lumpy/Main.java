@@ -2,14 +2,19 @@ package com.Lumpy;
 
 import java.util.*;
 
+import com.Lumpy.Utils.FormationUtils;
 import com.Lumpy.creature.*;
 
 public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        List<Creature> Ground = new ArrayList<>();
+        List<Creature> aliveHuman = new ArrayList<>();
+
+        List<Creature> aliveMonster = new ArrayList<>();
+        
         HuLuWa calabash[] = new HuLuWa[7];
+
         calabash[0] = new HuLuWa("´óÍÞ", 0, 0, 0, HuLuWa.COLOR.RED);
         calabash[1] = new HuLuWa("¶þÍÞ", 0, 1, 1, HuLuWa.COLOR.ORANGE);
         calabash[2] = new HuLuWa("ÈýÍÞ", 0, 2, 2, HuLuWa.COLOR.YELLOW);
@@ -18,24 +23,30 @@ public class Main {
         calabash[5] = new HuLuWa("ÁùÍÞ", 0, 5, 5, HuLuWa.COLOR.BLUE);
         calabash[6] = new HuLuWa("ÆßÍÞ", 0, 6, 6, HuLuWa.COLOR.PURPLE);
 
+        for (int i = 0; i < calabash.length; i++) {
+            aliveHuman.add(calabash[i]);
+        }
+
         Grandpa grandpa = new Grandpa("Ò¯Ò¯", 1, 3, 7);
 
+        aliveHuman.add(grandpa);
+
         Snake snake = new Snake("Éß¾«", 5, 4, 8);
+        Scorpion scorpion = new Scorpion("Ð«×Ó", 7, 8, 9);
+
+        aliveMonster.add(snake);
+        aliveMonster.add(scorpion);
+
         Goblin goblin[] = new Goblin[8];
         for (int i = 0; i < 8; i++) {
             String goblinName = new String();
             goblinName = "Ð¡Ñý" + String.valueOf(i + 1);
             goblin[i] = new Goblin(goblinName, 6, i + i % 2, 0);
-            Ground.add(goblin[i]);
-
+            aliveMonster.add(goblin[i]);
         }
 
 
-        for (int i = 0; i < calabash.length; i++) {
-            Ground.add(calabash[i]);
-        }
-
-        Iterator<Creature> iterator1 = Ground.iterator();
+        Iterator<Creature> iterator1 = aliveHuman.iterator();
         while (iterator1.hasNext()) {
             System.out.print(iterator1.next().getName() + " ");
         }
@@ -47,12 +58,12 @@ public class Main {
 
             Scanner scanner = new Scanner(System.in);
             a = scanner.nextInt();
-            int[] temp = BattleField.getFormationFromFile(a);
-            BattleField.initBattleField(temp, 0);
-            BattleField.getBattefield();
-            for (int i = 0; i < BattleField.battefield.length; i++) {
-                for (int j = 0; j < BattleField.battefield[0].length; j++) {
-                    if (j < calabash.length && i < calabash.length && BattleField.battefield[i][j] == 1) {
+/*            int[] temp = FormationUtils.getFormationFromFile(a);
+            Battlefield.initBattleField(temp, 0);
+            Battlefield.getBattefield();
+            for (int i = 0; i < Battlefield.battefield.length; i++) {
+                for (int j = 0; j < Battlefield.battefield[0].length; j++) {
+                    if (j < calabash.length && i < calabash.length && Battlefield.battefield[i][j] == 1) {
                         System.out.printf("%s ", calabash[i].getName());
                     } else {
                         System.out.print("¨€¨€¨€¨€ ");
@@ -60,7 +71,7 @@ public class Main {
                 }
                 System.out.println();
             }
-            BattleField.cleanBattlefield();
+            Battlefield.cleanBattlefield();*/
 
 
         } while (a != 5);
