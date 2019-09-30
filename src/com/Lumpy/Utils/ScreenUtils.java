@@ -16,7 +16,7 @@ public class ScreenUtils {
      */
     public static void screenClear(int delayTime) throws AWTException {
 
-        //The kepmap should be set as "CTRL + ALT +R" to make the method work correctly.
+        //The kepmap should be set as "CTRL + ALT + R" to make the method work correctly.
         Robot robot = new Robot();
         robot.delay(delayTime);
         robot.mousePress(InputEvent.BUTTON3_MASK);

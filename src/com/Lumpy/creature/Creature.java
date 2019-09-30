@@ -10,7 +10,7 @@ public class Creature {
 	private int axis_y;
 	private static int health = 100;
 
-	Creature(String name, int axis_x, int axis_y, int index) {
+	public Creature(String name, int axis_x, int axis_y, int index) {
 		this.name = name;
 		this.axis_x = axis_x;
 		this.axis_y = axis_y;
