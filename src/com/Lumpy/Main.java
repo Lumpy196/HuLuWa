@@ -4,11 +4,8 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import com.Lumpy.Utils.FormationUtils;
-import com.Lumpy.Utils.ScreenUtils;
 import com.Lumpy.creature.*;
-import com.Lumpy.swing.SwingJFrame;
-import com.Lumpy.swing.SwingJPanel;
+import com.Lumpy.swingGUI.SwingJFrame;
 
 public class Main {
 
@@ -20,7 +17,7 @@ public class Main {
 
         HuLuWa calabash[] = new HuLuWa[7];
 
-        calabash[0] = new HuLuWa("大娃", 0, 0, 0, HuLuWa.COLOR.RED);
+ /*       calabash[0] = new HuLuWa("大娃", 0, 0, 0, HuLuWa.COLOR.RED);
         calabash[1] = new HuLuWa("二娃", 0, 0, 1, HuLuWa.COLOR.ORANGE);
         calabash[2] = new HuLuWa("三娃", 0, 0, 2, HuLuWa.COLOR.YELLOW);
         calabash[3] = new HuLuWa("四娃", 0, 0, 3, HuLuWa.COLOR.GREEN);
@@ -49,7 +46,7 @@ public class Main {
             goblin[i] = new Goblin(goblinName, 0, 0, 10 + i);
             aliveMonster.add(goblin[i]);
         }
-
+*/
 
         SwingJFrame swingJFrame = new SwingJFrame();
         swingJFrame.setVisible(true);

@@ -1,4 +1,4 @@
-package com.Lumpy.swing;
+package com.Lumpy.swingGUI;
 
 import javax.swing.*;
 
@@ -9,7 +9,7 @@ public class SwingJFrame extends JFrame {
 
         this.add(swingJPanel);
 
-        this.setTitle("°¡~°¡~Îå»·");
+        this.setTitle("ºùÂ«ÍÞ¾ÈÒ¯Ò¯");
 
         this.setSize(800, 600);
 
