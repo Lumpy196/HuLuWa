@@ -7,6 +7,8 @@ import java.util.List;
 import com.Lumpy.Utils.FormationUtils;
 import com.Lumpy.Utils.ScreenUtils;
 import com.Lumpy.creature.*;
+import com.Lumpy.swing.SwingJFrame;
+import com.Lumpy.swing.SwingJPanel;
 
 public class Main {
 
@@ -15,7 +17,7 @@ public class Main {
         List<Creature> aliveHuman = new ArrayList<>();
 
         List<Creature> aliveMonster = new ArrayList<>();
-        
+
         HuLuWa calabash[] = new HuLuWa[7];
 
         calabash[0] = new HuLuWa("´óÍÞ", 0, 0, 0, HuLuWa.COLOR.RED);
@@ -49,6 +51,9 @@ public class Main {
         }
 
 
+        SwingJFrame swingJFrame = new SwingJFrame();
+        swingJFrame.setVisible(true);
+/*
         int a, b;
         do {
             //Scanner scanner = new Scanner(System.in);
@@ -66,6 +71,7 @@ public class Main {
 
 
         } while (true);
+*/
 
 
     }

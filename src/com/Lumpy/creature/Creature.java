@@ -1,6 +1,11 @@
 package com.Lumpy.creature;
 
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 public class Creature {
 
 	private int index;
@@ -9,6 +14,15 @@ public class Creature {
 	private int axis_x;
 	private int axis_y;
 	private static int health = 100;
+    private static Image image;
+
+    static {
+        try {
+            image = ImageIO.read(new FileInputStream("res/image/hitHandRush.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	public Creature(String name, int axis_x, int axis_y, int index) {
 		this.name = name;
@@ -64,6 +78,14 @@ public class Creature {
 	public void setAxis_y(int axis_y) {
 		this.axis_y = axis_y;
 	}
+
+    public static Image getImage() {
+        return image;
+    }
+
+    public static void setImage(Image image) {
+        Creature.image = image;
+    }
 
 	public void checkUp(){
 		System.out.println("葫芦娃:" + name + "坐标为:" + axis_x + axis_y);

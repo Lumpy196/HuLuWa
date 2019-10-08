@@ -3,21 +3,19 @@ package com.Lumpy.swing;
 import com.Lumpy.creature.Creature;
 
 import javax.swing.*;
+import java.awt.*;
+
+import javafx.application.Application;
 
 public class SwingJPanel extends JPanel {
 
-    SwingJFrame swingJFrame;
+    Creature creature = new Creature("test", 1, 1, 1);
 
-    public Creature creature = new Creature("尼日利亚猎妈人", 1, 1, 100);
+    public void paint(Graphics g) {
+        super.paint(g);
 
-    //ImageIcon imageIcon =
-
-    public void init(SwingJFrame swingJFrame) {
-        this.swingJFrame = swingJFrame;
-        creature.setAxis_x(200);
-        creature.setAxis_y(50);
-
-
+        g.drawLine(10, 10, 40, 40);
+        g.drawImage(creature.getImage(), 50, 100, 500, 400, this);
     }
 
 }
