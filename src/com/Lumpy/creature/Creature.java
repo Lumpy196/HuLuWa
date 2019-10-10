@@ -3,7 +3,7 @@ package com.Lumpy.creature;
 
 public class Creature extends Thing2D {
 
-	public Creature(String name, int axis_x, int axis_y) {
+	public Creature(int axis_x, int axis_y) {
 		super(axis_x, axis_y);
 
 
