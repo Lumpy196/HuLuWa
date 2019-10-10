@@ -9,7 +9,7 @@ public class SwingJFrame extends JFrame {
 
         this.add(swingJPanel);
 
-        this.setTitle("ºùÂ«ÍÞ¾ÈÒ¯Ò¯");
+        this.setTitle("For Lotus!");
 
         this.setSize(800, 600);
 
@@ -22,8 +22,6 @@ public class SwingJFrame extends JFrame {
         this.setVisible(true);
 
 
-
-        //MainJpanel mainJpanel = new MainJpanel();
     }
 
 }
