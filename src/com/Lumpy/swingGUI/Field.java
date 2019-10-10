@@ -1,7 +1,7 @@
 package com.Lumpy.swingGUI;
 
 
-import com.Lumpy.creature.Thing2D;
+import com.Lumpy.creature.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,6 +17,18 @@ public class Field extends JPanel {
 
     private ArrayList tiles = new ArrayList();
     private Player player;
+
+    private ArrayList<Creature> aliveHuman = new ArrayList<Creature>();
+    private ArrayList<Creature> aliveMonster = new ArrayList<Creature>();
+
+    private ArrayList<Creature> aliveCreatures = new ArrayList<Creature>();
+
+    private int humanQuantity = 8;
+    private int monsterQuantity = 8;
+
+    private int creatureQuantity = humanQuantity + monsterQuantity;
+
+
 
     private int w = 0;
     private int h = 0;
@@ -47,10 +59,38 @@ public class Field extends JPanel {
         return this.h;
     }
 
+    public final void initCreatures() {
+
+        aliveHuman.add(new HuLuWa(0, 1, HuLuWa.COLOR.RED));
+        aliveHuman.add(new HuLuWa(0, 2, HuLuWa.COLOR.ORANGE));
+        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.YELLOW));
+        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.GREEN));
+        aliveHuman.add(new HuLuWa(0, 4, HuLuWa.COLOR.CYAN));
+        aliveHuman.add(new HuLuWa(0, 5, HuLuWa.COLOR.BLUE));
+        aliveHuman.add(new HuLuWa(0, 6, HuLuWa.COLOR.PURPLE));
+        aliveHuman.add(new Grandpa(1, 1));
+
+        aliveCreatures.addAll(aliveHuman);
+
+        aliveMonster.add(new Goblin(6, 1));
+        aliveMonster.add(new Goblin(6, 2));
+        aliveMonster.add(new Goblin(6, 3));
+        aliveMonster.add(new Goblin(6, 4));
+        aliveMonster.add(new Goblin(6, 5));
+        aliveMonster.add(new Goblin(6, 6));
+
+        aliveMonster.add(new Snake(5, 1));
+        aliveMonster.add(new Scorpion(5, 2));
+
+        aliveCreatures.addAll(aliveMonster);
+
+    }
+
     public final void initWorld() {
 
         int x = OFFSET;
         int y = OFFSET;
+
 
         Tile a;
 
