@@ -1,16 +1,22 @@
 package com.Lumpy.creature;
 
 
+import com.Lumpy.swingGUI.Field;
+
 import java.awt.*;
 import java.lang.invoke.SwitchPoint;
 import java.net.URL;
 
 public class HuLuWa extends Human {
 
+	public enum COLOR {
+		RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE
+	}
+
 	private COLOR color;
 
-	public HuLuWa(int axis_x, int axis_y, COLOR color) {
-		super(axis_x, axis_y);
+	public HuLuWa(int axis_x, int axis_y, COLOR color, Field field) {
+		super(axis_x, axis_y, field);
 		this.color = color;
 		String imageName = new String();
 		switch (this.color) {
@@ -59,9 +65,6 @@ public class HuLuWa extends Human {
 		this.setImage(location);
 	}
 
-	public enum COLOR {
-		RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE
-	}
 
 	public COLOR getColor() {
 		return color;

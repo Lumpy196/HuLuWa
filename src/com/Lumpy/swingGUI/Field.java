@@ -12,11 +12,11 @@ import javax.swing.JPanel;
 
 public class Field extends JPanel {
 
-    private final int OFFSET = 30;
+    private final int OFFSET = 20;
     private final int SPACE = 20;
 
     private ArrayList tiles = new ArrayList();
-    private Player player;
+    private Creature player;
 
     private ArrayList<Creature> aliveHuman = new ArrayList<Creature>();
     private ArrayList<Creature> aliveMonster = new ArrayList<Creature>();
@@ -35,14 +35,16 @@ public class Field extends JPanel {
     private boolean completed = false;
 
     private String level =
-            "..........\n" +
-                    "..........\n" +
-                    "..........\n" +
-                    "..........\n" +
-                    "..........\n" +
-                    "..........\n" +
-                    "..........\n" +
-                    "..........\n";
+            "....................\n" +
+                    "....................\n" +
+                    "....................\n" +
+                    "....................\n" +
+                    "....................\n" +
+                    "....................\n" +
+                    "....................\n" +
+                    "....................\n" +
+                    "....................\n" +
+                    "....................\n";
 
     public Field() {
 
@@ -61,32 +63,35 @@ public class Field extends JPanel {
 
     public final void initCreatures() {
 
-        aliveHuman.add(new HuLuWa(0, 1, HuLuWa.COLOR.RED));
-        aliveHuman.add(new HuLuWa(0, 2, HuLuWa.COLOR.ORANGE));
-        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.YELLOW));
-        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.GREEN));
-        aliveHuman.add(new HuLuWa(0, 4, HuLuWa.COLOR.CYAN));
-        aliveHuman.add(new HuLuWa(0, 5, HuLuWa.COLOR.BLUE));
-        aliveHuman.add(new HuLuWa(0, 6, HuLuWa.COLOR.PURPLE));
-        aliveHuman.add(new Grandpa(1, 1));
+        aliveHuman.add(new HuLuWa(0, 1, HuLuWa.COLOR.RED, this));
+        aliveHuman.add(new HuLuWa(0, 2, HuLuWa.COLOR.ORANGE, this));
+        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.YELLOW, this));
+        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.GREEN, this));
+        aliveHuman.add(new HuLuWa(0, 4, HuLuWa.COLOR.CYAN, this));
+        aliveHuman.add(new HuLuWa(0, 5, HuLuWa.COLOR.BLUE, this));
+        aliveHuman.add(new HuLuWa(0, 6, HuLuWa.COLOR.PURPLE, this));
+        aliveHuman.add(new Grandpa(1, 1, this));
 
         aliveCreatures.addAll(aliveHuman);
 
-        aliveMonster.add(new Goblin(6, 1));
-        aliveMonster.add(new Goblin(6, 2));
-        aliveMonster.add(new Goblin(6, 3));
-        aliveMonster.add(new Goblin(6, 4));
-        aliveMonster.add(new Goblin(6, 5));
-        aliveMonster.add(new Goblin(6, 6));
+        aliveMonster.add(new Goblin(6, 1, this));
+        aliveMonster.add(new Goblin(6, 2, this));
+        aliveMonster.add(new Goblin(6, 3, this));
+        aliveMonster.add(new Goblin(6, 4, this));
+        aliveMonster.add(new Goblin(6, 5, this));
+        aliveMonster.add(new Goblin(6, 6, this));
 
-        aliveMonster.add(new Snake(5, 1));
-        aliveMonster.add(new Scorpion(5, 2));
+        aliveMonster.add(new Snake(5, 1, this));
+        aliveMonster.add(new Scorpion(5, 2, this));
 
         aliveCreatures.addAll(aliveMonster);
 
     }
 
     public final void initWorld() {
+
+        initCreatures();
+
 
         int x = OFFSET;
         int y = OFFSET;
@@ -111,7 +116,7 @@ public class Field extends JPanel {
                 tiles.add(a);
                 x += SPACE;
             } else if (item == '@') {
-                player = new Player(x, y, this);
+                player = aliveHuman.get(0);
                 x += SPACE;
             } else if (item == ' ') {
                 x += SPACE;
@@ -120,18 +125,19 @@ public class Field extends JPanel {
             h = y;
         }
 
-        player = new Player(0 + OFFSET, 0 + OFFSET,
-                this);
+        player = aliveHuman.get(1);
 
     }
 
     public void buildWorld(Graphics g) {
+
 
         g.setColor(new Color(250, 240, 170));
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         ArrayList world = new ArrayList();
         world.addAll(tiles);
+
 
 
         world.add(player);
@@ -170,31 +176,9 @@ public class Field extends JPanel {
                 return;
             }
 
-
             int key = e.getKeyCode();
 
-
-            if (key == KeyEvent.VK_LEFT) {
-
-
-                player.move(-SPACE, 0);
-
-            } else if (key == KeyEvent.VK_RIGHT) {
-
-
-                player.move(SPACE, 0);
-
-            } else if (key == KeyEvent.VK_UP) {
-
-
-                player.move(0, -SPACE);
-
-            } else if (key == KeyEvent.VK_DOWN) {
-
-
-                player.move(0, SPACE);
-
-            } else if (key == KeyEvent.VK_S) {
+            if (key == KeyEvent.VK_S) {
 
                 new Thread(player).start();
 
