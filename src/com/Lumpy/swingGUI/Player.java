@@ -1,6 +1,7 @@
 package com.Lumpy.swingGUI;
 
 
+import com.Lumpy.creature.Creature;
 import com.Lumpy.creature.Thing2D;
 
 import java.awt.Image;
@@ -16,12 +17,14 @@ public class Player extends Thing2D implements Runnable {
 
         this.field = field;
 
-        //URL loc = this.getClass().getClassLoader().getResource("player.png");
-
-        ImageIcon iia = new ImageIcon("res/image/player.png");
+        URL loc = this.getClass().getClassLoader().getResource("2.png");
+        //System.out.println(loc);
+        ImageIcon iia = new ImageIcon(loc);
+        //ImageIcon iia = new ImageIcon("res/image/player.png");
         Image image = iia.getImage();
         this.setImage(image);
     }
+
 
     public void move(int x, int y) {
         int nx = this.getAxis_x() + x;

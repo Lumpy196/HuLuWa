@@ -2,6 +2,7 @@ package com.Lumpy.creature;
 
 
 import java.awt.*;
+import java.net.URL;
 
 
 public class Thing2D {
@@ -47,6 +48,10 @@ public class Thing2D {
     }
 
     public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public void setImage(URL url) {
         this.image = image;
     }
 
