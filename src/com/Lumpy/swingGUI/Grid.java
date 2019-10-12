@@ -43,7 +43,12 @@ public class Grid {
     }
 
     public void setOccupier(Creature occupier) {
+
         this.occupier = occupier;
+        if (this.occupier != null) {
+            occupier.setAxis_x(this.axis_x);
+            occupier.setAxis_y(this.axis_y);
+        }
     }
 
     public void clearOccupier() {

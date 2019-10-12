@@ -38,12 +38,20 @@ public class Creature extends Thing2D implements Runnable {
         if (ny >= this.field.getMaxsize() || ny < 0) {
             ny = this.getAxis_y() - 2 * axis_y;
         }
+        synchronized (this.field.getGrid(nx, ny)) {
+            if (this.field.getGrid(nx, ny).isEmptyOccupier()) {
+                this.setAxis_x(nx);
+                this.setAxis_y(ny);
+                this.field.getGrid(nx, ny).setOccupier(this);
+                this.field.getGrid(this.getAxis_x(), this.getAxis_y()).clearOccupier();
 
+                System.out.println("x+" + axis_x + ", y+" + axis_y);
+                return true;
+            } else {
+                return false;
+            }
+        }
 
-
-        this.setAxis_x(nx);
-        this.setAxis_y(ny);
-        return true;
 	}
 
 	public void attack() {
@@ -59,11 +67,11 @@ public class Creature extends Thing2D implements Runnable {
             int goal_y = random.nextInt(5);
 
             this.move(goal_x, goal_y);
-            System.out.println("x+" + goal_x + ", y+" + goal_y);
+
             //this.move(rand.nextInt(10), rand.nextInt(10));
             try {
 
-                Thread.sleep(random.nextInt(100) + 100);
+                Thread.sleep(random.nextInt(100) + 200);
                 this.field.repaint();
 
             } catch (Exception e) {

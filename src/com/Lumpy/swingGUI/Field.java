@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import javax.swing.JPanel;
 
 import com.Lumpy.swingGUI.Grid;
@@ -20,10 +21,7 @@ public class Field extends JPanel {
 
 
     private ArrayList tiles = new ArrayList();
-    private Creature player;
     private Grid grid;
-
-    private ArrayList<Creature> playerS = new ArrayList<Creature>();
 
     private ArrayList<Creature> aliveHuman = new ArrayList<Creature>();
     private ArrayList<Creature> aliveMonster = new ArrayList<Creature>();
@@ -32,21 +30,12 @@ public class Field extends JPanel {
 
     private ArrayList<ArrayList<Grid>> grids = new ArrayList<>();
 
+    private ArrayList<Creature> players = new ArrayList<>();
+
     private int w = 0;
     private int h = 0;
     private boolean completed = false;
 
-    private String level =
-            "....................\n" +
-                    "....................\n" +
-                    "....................\n" +
-                    "....................\n" +
-                    "....................\n" +
-                    "....................\n" +
-                    "....................\n" +
-                    "....................\n" +
-                    "....................\n" +
-                    "....................\n";
 
     public Field() {
 
@@ -88,7 +77,7 @@ public class Field extends JPanel {
         aliveHuman.add(new HuLuWa(0, 4, HuLuWa.COLOR.CYAN, this));
         aliveHuman.add(new HuLuWa(0, 5, HuLuWa.COLOR.BLUE, this));
         aliveHuman.add(new HuLuWa(10, 5, HuLuWa.COLOR.PURPLE, this));
-        aliveHuman.add(new Grandpa(1, 1, this));
+        //aliveHuman.add(new Grandpa(1, 1, this));
 
         aliveCreatures.addAll(aliveHuman);
 
@@ -134,42 +123,7 @@ public class Field extends JPanel {
         w = x + MAXSIZE * SPACE;
         h = y + MAXSIZE * SPACE;
 
-        player = aliveHuman.get(6);
-
-/*
-        for (int i = 0; i < level.length(); i++) {
-
-            char item = level.charAt(i);
-
-            if (item == '\n') {
-                y += SPACE;
-                if (this.w < x) {
-                    this.w = x;
-                }
-
-                x = OFFSET;
-            } else if (item == '.') {
-                a = new Tile(x, y);
-                tiles.add(a);
-                x += SPACE;
-            } else if (item == '@') {
-                player = aliveHuman.get(0);
-                x += SPACE;
-            } else if (item == ' ') {
-                x += SPACE;
-            }
-
-            h = y;
-        }
-*/
-
-        //player = aliveHuman.get(6);
-
-        //playerS.addAll(aliveHuman);
-
-    }
-
-    public void initWorld_2() {
+        players = aliveHuman;
 
     }
 
@@ -183,8 +137,7 @@ public class Field extends JPanel {
         world.addAll(tiles);
 
 
-
-        world.add(player);
+        world.addAll(players);
 
         //world.addAll(playerS);
 
@@ -224,8 +177,11 @@ public class Field extends JPanel {
             int key = e.getKeyCode();
 
             if (key == KeyEvent.VK_S) {
-
-                new Thread(player).start();
+                ListIterator<Creature> listIterator = players.listIterator();
+                while (listIterator.hasNext()) {
+                    Creature player = listIterator.next();
+                    new Thread(player).start();
+                }
 
             } else if (key == KeyEvent.VK_R) {
                 restartLevel();
