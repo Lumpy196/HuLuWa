@@ -11,6 +11,7 @@ public class Thing2D {
     private int axis_x;
     private int axis_y;
 
+
     private String name;
 
     private Image image;

@@ -15,6 +15,13 @@ public class Grid {
         this.axis_y = axis_y;
     }
 
+    public Grid(int axis_x, int axis_y, Creature occupier) {
+        this.axis_x = axis_x;
+        this.axis_y = axis_y;
+        this.occupier = occupier;
+    }
+
+
     public int getAxis_x() {
         return axis_x;
     }

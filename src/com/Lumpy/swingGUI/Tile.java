@@ -16,4 +16,5 @@ public class Tile extends Thing2D {
         Image image = iia.getImage();
         this.setImage(image);
     }
+
 }

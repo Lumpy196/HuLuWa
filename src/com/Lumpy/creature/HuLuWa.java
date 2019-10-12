@@ -3,8 +3,6 @@ package com.Lumpy.creature;
 
 import com.Lumpy.swingGUI.Field;
 
-import java.awt.*;
-import java.lang.invoke.SwitchPoint;
 import java.net.URL;
 
 public class HuLuWa extends Human {

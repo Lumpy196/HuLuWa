@@ -10,25 +10,27 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
+import com.Lumpy.swingGUI.Grid;
+
 public class Field extends JPanel {
 
-    private final int OFFSET = 20;
-    private final int SPACE = 20;
+    private static final int OFFSET = 20;
+    private static final int SPACE = 20;
+    private static final int MAXSIZE = 15;
+
 
     private ArrayList tiles = new ArrayList();
     private Creature player;
+    private Grid grid;
+
+    private ArrayList<Creature> playerS = new ArrayList<Creature>();
 
     private ArrayList<Creature> aliveHuman = new ArrayList<Creature>();
     private ArrayList<Creature> aliveMonster = new ArrayList<Creature>();
 
     private ArrayList<Creature> aliveCreatures = new ArrayList<Creature>();
 
-    private int humanQuantity = 8;
-    private int monsterQuantity = 8;
-
-    private int creatureQuantity = humanQuantity + monsterQuantity;
-
-
+    private ArrayList<ArrayList<Grid>> grids = new ArrayList<>();
 
     private int w = 0;
     private int h = 0;
@@ -53,6 +55,22 @@ public class Field extends JPanel {
         initWorld();
     }
 
+    public int getOFFSET() {
+        return OFFSET;
+    }
+
+    public int getSPACE() {
+        return SPACE;
+    }
+
+    public int getMaxsize() {
+        return MAXSIZE;
+    }
+
+    public Grid getGrid(int axis_x, int axis_y) {
+        return this.grids.get(axis_x).get(axis_y);
+    }
+
     public int getBoardWidth() {
         return this.w;
     }
@@ -65,11 +83,11 @@ public class Field extends JPanel {
 
         aliveHuman.add(new HuLuWa(0, 1, HuLuWa.COLOR.RED, this));
         aliveHuman.add(new HuLuWa(0, 2, HuLuWa.COLOR.ORANGE, this));
-        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.YELLOW, this));
+        aliveHuman.add(new HuLuWa(2, 3, HuLuWa.COLOR.YELLOW, this));
         aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.GREEN, this));
         aliveHuman.add(new HuLuWa(0, 4, HuLuWa.COLOR.CYAN, this));
         aliveHuman.add(new HuLuWa(0, 5, HuLuWa.COLOR.BLUE, this));
-        aliveHuman.add(new HuLuWa(0, 6, HuLuWa.COLOR.PURPLE, this));
+        aliveHuman.add(new HuLuWa(10, 5, HuLuWa.COLOR.PURPLE, this));
         aliveHuman.add(new Grandpa(1, 1, this));
 
         aliveCreatures.addAll(aliveHuman);
@@ -90,6 +108,14 @@ public class Field extends JPanel {
 
     public final void initWorld() {
 
+        for (int axis_x = 0; axis_x < MAXSIZE; axis_x++) {
+            ArrayList<Grid> gridCol = new ArrayList<>();
+            for (int axis_y = 0; axis_y < MAXSIZE; axis_y++) {
+                gridCol.add(new Grid(axis_x, axis_y, null));
+            }
+            this.grids.add(gridCol);
+        }
+
         initCreatures();
 
 
@@ -99,7 +125,18 @@ public class Field extends JPanel {
 
         Tile a;
 
+        for (int axis_x = 0; axis_x < MAXSIZE; axis_x++) {
+            for (int axis_y = 0; axis_y < MAXSIZE; axis_y++) {
+                tiles.add(new Tile(axis_x, axis_y));
+            }
+        }
 
+        w = x + MAXSIZE * SPACE;
+        h = y + MAXSIZE * SPACE;
+
+        player = aliveHuman.get(6);
+
+/*
         for (int i = 0; i < level.length(); i++) {
 
             char item = level.charAt(i);
@@ -124,8 +161,15 @@ public class Field extends JPanel {
 
             h = y;
         }
+*/
 
-        player = aliveHuman.get(1);
+        //player = aliveHuman.get(6);
+
+        //playerS.addAll(aliveHuman);
+
+    }
+
+    public void initWorld_2() {
 
     }
 
@@ -142,11 +186,12 @@ public class Field extends JPanel {
 
         world.add(player);
 
+        //world.addAll(playerS);
 
         for (int i = 0; i < world.size(); i++) {
 
             Thing2D item = (Thing2D) world.get(i);
-            g.drawImage(item.getImage(), item.getAxis_x(), item.getAxis_y(), this);
+            g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET, item.getAxis_y() * SPACE + OFFSET, this);
 /*            if (item instanceof Player) {
                 g.drawImage(item.getImage(), item.getAxis_x() + 2, item.getAxis_y() + 2, this);
             } else {
