@@ -1,6 +1,6 @@
-package com.Lumpy.Utils;
+package com.hlw.Utils;
 
-import com.Lumpy.creature.Creature;
+import com.hlw.creature.Creature;
 
 import java.io.FileReader;
 import java.io.IOException;

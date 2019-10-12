@@ -1,6 +1,6 @@
-package com.Lumpy.swingGUI;
+package com.hlw.swingGUI;
 
-import com.Lumpy.creature.Thing2D;
+import com.hlw.Thing2D;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,12 +1,11 @@
-package com.Lumpy.creature;
+package com.hlw.creature;
 
 
-import com.Lumpy.swingGUI.Field;
-import com.Lumpy.swingGUI.Grid;
-import com.Lumpy.swingGUI.Ground;
+import com.hlw.Thing2D;
+import com.hlw.swingGUI.Field;
+import com.hlw.swingGUI.Grid;
 
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Creature extends Thing2D implements Runnable {
@@ -44,8 +43,10 @@ public class Creature extends Thing2D implements Runnable {
                 this.setAxis_y(ny);
                 this.field.getGrid(nx, ny).setOccupier(this);
                 this.field.getGrid(this.getAxis_x(), this.getAxis_y()).clearOccupier();
+                if (this instanceof HuLuWa) {
+                    System.out.println(((HuLuWa) this).getColor() + ": x+" + axis_x + ", y+" + axis_y);
+                }
 
-                System.out.println("x+" + axis_x + ", y+" + axis_y);
                 return true;
             } else {
                 return false;

@@ -1,4 +1,4 @@
-package com.Lumpy.swingGUI;
+package com.hlw.swingGUI;
 
 import javax.swing.*;
 
@@ -21,7 +21,6 @@ public final class Ground extends JFrame {
         setLocationRelativeTo(null);
         setTitle("Ground");
     }
-
 
 }
 

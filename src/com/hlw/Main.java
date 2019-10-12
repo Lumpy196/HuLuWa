@@ -1,6 +1,6 @@
-package com.Lumpy;
+package com.hlw;
 
-import com.Lumpy.swingGUI.Ground;
+import com.hlw.swingGUI.Ground;
 
 public class Main {
 

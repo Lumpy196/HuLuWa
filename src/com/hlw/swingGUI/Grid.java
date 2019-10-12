@@ -1,6 +1,6 @@
-package com.Lumpy.swingGUI;
+package com.hlw.swingGUI;
 
-import com.Lumpy.creature.Creature;
+import com.hlw.creature.Creature;
 
 public class Grid {
 

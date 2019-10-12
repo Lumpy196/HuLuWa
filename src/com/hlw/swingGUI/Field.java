@@ -1,7 +1,8 @@
-package com.Lumpy.swingGUI;
+package com.hlw.swingGUI;
 
 
-import com.Lumpy.creature.*;
+import com.hlw.Thing2D;
+import com.hlw.creature.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,8 +11,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import javax.swing.JPanel;
-
-import com.Lumpy.swingGUI.Grid;
 
 public class Field extends JPanel {
 
@@ -195,7 +194,14 @@ public class Field extends JPanel {
     public void restartLevel() {
 
         tiles.clear();
-        initWorld();
+
+        aliveCreatures.clear();
+        //Todo: fix the bug that restartLevel can't kill the threads
+
+        Thread.
+
+                initWorld();
+
         if (completed) {
             completed = false;
         }

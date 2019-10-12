@@ -1,6 +1,6 @@
-package com.Lumpy.creature;
+package com.hlw.creature;
 
-import com.Lumpy.swingGUI.Field;
+import com.hlw.swingGUI.Field;
 
 public class Snake extends Monster{
 

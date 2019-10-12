@@ -1,7 +1,7 @@
-package com.Lumpy.creature;
+package com.hlw.creature;
 
 
-import com.Lumpy.swingGUI.Field;
+import com.hlw.swingGUI.Field;
 
 import java.net.URL;
 
