@@ -1,4 +1,4 @@
-package com.hlw.swingGUI;
+package com.hlw.worldcraft;
 
 
 import com.hlw.Thing2D;
@@ -20,19 +20,19 @@ public class Field extends JPanel {
 
 
     private ArrayList tiles = new ArrayList();
-    private Grid grid;
-
     private ArrayList<Creature> aliveHuman = new ArrayList<Creature>();
     private ArrayList<Creature> aliveMonster = new ArrayList<Creature>();
-
     private ArrayList<Creature> aliveCreatures = new ArrayList<Creature>();
 
     private ArrayList<ArrayList<Grid>> grids = new ArrayList<>();
 
     private ArrayList<Creature> players = new ArrayList<>();
 
-    private int w = 0;
-    private int h = 0;
+    private ArrayList<Thread> threads = new ArrayList<>();
+
+    private int weight = OFFSET + MAXSIZE * SPACE;
+    private int height = OFFSET + MAXSIZE * SPACE;
+
     private boolean completed = false;
 
 
@@ -60,11 +60,24 @@ public class Field extends JPanel {
     }
 
     public int getBoardWidth() {
-        return this.w;
+        return this.weight;
     }
 
     public int getBoardHeight() {
-        return this.h;
+        return this.height;
+    }
+
+    public boolean killCreatures(Creature creature) {
+        creature.killCreature();
+        if (creature instanceof Human) {
+            aliveHuman.remove(creature);
+        } else if (creature instanceof Monster) {
+            aliveMonster.remove(creature);
+        } else {
+            return false;
+        }
+        aliveCreatures.remove(creature);
+        return true;
     }
 
     public final void initCreatures() {
@@ -106,21 +119,11 @@ public class Field extends JPanel {
 
         initCreatures();
 
-
-        int x = OFFSET;
-        int y = OFFSET;
-
-
-        Tile a;
-
         for (int axis_x = 0; axis_x < MAXSIZE; axis_x++) {
             for (int axis_y = 0; axis_y < MAXSIZE; axis_y++) {
                 tiles.add(new Tile(axis_x, axis_y));
             }
         }
-
-        w = x + MAXSIZE * SPACE;
-        h = y + MAXSIZE * SPACE;
 
         players = aliveHuman;
 
@@ -128,27 +131,21 @@ public class Field extends JPanel {
 
     public void buildWorld(Graphics g) {
 
-
         g.setColor(new Color(250, 240, 170));
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         ArrayList world = new ArrayList();
         world.addAll(tiles);
-
-
         world.addAll(players);
-
-        //world.addAll(playerS);
 
         for (int i = 0; i < world.size(); i++) {
 
             Thing2D item = (Thing2D) world.get(i);
-            g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET, item.getAxis_y() * SPACE + OFFSET, this);
-/*            if (item instanceof Player) {
-                g.drawImage(item.getImage(), item.getAxis_x() + 2, item.getAxis_y() + 2, this);
+            if (item instanceof Creature) {
+                g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET + 2, item.getAxis_y() * SPACE + OFFSET + 2, this);
             } else {
-                g.drawImage(item.getImage(), item.getAxis_x(), item.getAxis_y(), this);
-            }*/
+                g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET, item.getAxis_y() * SPACE + OFFSET, this);
+            }
 
             if (completed) {
                 g.setColor(new Color(0, 0, 0));
@@ -177,30 +174,54 @@ public class Field extends JPanel {
 
             if (key == KeyEvent.VK_S) {
                 ListIterator<Creature> listIterator = players.listIterator();
+
                 while (listIterator.hasNext()) {
                     Creature player = listIterator.next();
-                    new Thread(player).start();
+                    Thread thread = new Thread(player);
+                    threads.add(thread);
+                    thread.start();
                 }
 
             } else if (key == KeyEvent.VK_R) {
-                restartLevel();
+                try {
+                    restartLevel();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             repaint();
         }
     }
 
+    public void killThread() throws InterruptedException {
 
-    public void restartLevel() {
+        ListIterator<Creature> listIterator = players.listIterator();
+        while (listIterator.hasNext()) {
+            Creature player = listIterator.next();
+            player.setThreadIsAlive(false);
+
+        }
+        threads.clear();
+    }
+
+    public void restartLevel() throws InterruptedException {
 
         tiles.clear();
 
+
+        killThread();
+
+        players.clear();
+        aliveHuman.clear();
+        aliveMonster.clear();
         aliveCreatures.clear();
+        //aliveCreatures.clear();
         //Todo: fix the bug that restartLevel can't kill the threads
 
-        Thread.
+        System.out.println(Thread.activeCount());
 
-                initWorld();
+        initWorld();
 
         if (completed) {
             completed = false;

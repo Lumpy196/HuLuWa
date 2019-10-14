@@ -1,6 +1,6 @@
 package com.hlw.creature;
 
-import com.hlw.swingGUI.Field;
+import com.hlw.worldcraft.Field;
 
 public class Snake extends Monster{
 

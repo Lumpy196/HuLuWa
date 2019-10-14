@@ -6,13 +6,13 @@ import java.awt.*;
 import java.net.URL;
 
 
-public class Thing2D {
+public class Thing2D extends Thread {
 
     private int axis_x;
     private int axis_y;
 
 
-    private String name;
+    //private String name;
 
     private Image image;
 
@@ -37,13 +37,13 @@ public class Thing2D {
         this.axis_y = axis_y;
     }
 
-    public String getName() {
+/*    public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
+    }*/
 
     public Image getImage() {
         return image;

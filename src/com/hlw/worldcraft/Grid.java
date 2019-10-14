@@ -1,4 +1,4 @@
-package com.hlw.swingGUI;
+package com.hlw.worldcraft;
 
 import com.hlw.creature.Creature;
 

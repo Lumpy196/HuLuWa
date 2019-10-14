@@ -1,6 +1,6 @@
 package com.hlw;
 
-import com.hlw.swingGUI.Ground;
+import com.hlw.worldcraft.Ground;
 
 public class Main {
 

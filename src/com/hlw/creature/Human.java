@@ -1,7 +1,7 @@
 package com.hlw.creature;
 
 
-import com.hlw.swingGUI.Field;
+import com.hlw.worldcraft.Field;
 
 public class Human extends Creature{
 

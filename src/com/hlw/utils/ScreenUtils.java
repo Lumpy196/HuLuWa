@@ -1,4 +1,4 @@
-package com.hlw.Utils;
+package com.hlw.utils;
 
 import java.awt.*;
 import java.awt.event.InputEvent;

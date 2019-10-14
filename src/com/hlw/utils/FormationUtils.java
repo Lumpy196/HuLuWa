@@ -1,4 +1,4 @@
-package com.hlw.Utils;
+package com.hlw.utils;
 
 import com.hlw.creature.Creature;
 
