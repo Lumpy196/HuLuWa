@@ -19,37 +19,37 @@ public class HuLuWa extends Human {
 		String imageName = new String();
 		switch (this.color) {
 			case RED: {
-				imageName = "1.png";
+                imageName = "red.png";
 				break;
 			}
 
 			case ORANGE: {
-				imageName = "2.png";
+                imageName = "orange.png";
 				break;
 			}
 
 			case YELLOW: {
-				imageName = "3.png";
+                imageName = "yellow.png";
 				break;
 			}
 
 			case GREEN: {
-				imageName = "4.png";
+                imageName = "green.png";
 				break;
 			}
 
 			case CYAN: {
-				imageName = "5.png";
+                imageName = "cyan.png";
 				break;
 			}
 
 			case BLUE: {
-				imageName = "6.png";
+                imageName = "blue.png";
 				break;
 			}
 
 			case PURPLE: {
-				imageName = "7.png";
+                imageName = "purple.png";
 				break;
 			}
 

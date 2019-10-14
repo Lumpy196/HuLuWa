@@ -56,10 +56,12 @@ public class Creature extends Thing2D {
         synchronized (this.field.getGrid(nx, ny)) {
             if (this.field.getGrid(nx, ny).isEmptyOccupier()) {
 
-                this.setAxis_x(nx);
-                this.setAxis_y(ny);
                 this.field.getGrid(nx, ny).setOccupier(this);
                 this.field.getGrid(this.getAxis_x(), this.getAxis_y()).clearOccupier();
+                this.setAxis_x(nx);
+                this.setAxis_y(ny);
+                this.grid.setAxis_x(nx);
+                this.grid.setAxis_y(ny);
                 if (this instanceof HuLuWa) {
                     //System.out.println(((HuLuWa) this).getColor() + ": x+" + axis_x + ", y+" + axis_y);
                 }
@@ -97,7 +99,7 @@ public class Creature extends Thing2D {
         }
         try {
             sleep(100);
-            System.out.println("thread is still running");
+            System.out.println("thread " + this.getName() + " is dead");
             this.grid.clearOccupier();
         } catch (InterruptedException e) {
             e.printStackTrace();

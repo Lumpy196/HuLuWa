@@ -18,6 +18,7 @@ public class Field extends JPanel {
     private static final int SPACE = 20;
     private static final int MAXSIZE = 15;
 
+    private boolean battleStart = false;
 
     private ArrayList tiles = new ArrayList();
     private ArrayList<Creature> aliveHuman = new ArrayList<Creature>();
@@ -89,7 +90,8 @@ public class Field extends JPanel {
         aliveHuman.add(new HuLuWa(0, 4, HuLuWa.COLOR.CYAN, this));
         aliveHuman.add(new HuLuWa(0, 5, HuLuWa.COLOR.BLUE, this));
         aliveHuman.add(new HuLuWa(10, 5, HuLuWa.COLOR.PURPLE, this));
-        //aliveHuman.add(new Grandpa(1, 1, this));
+
+        aliveHuman.add(new Grandpa(1, 1, this));
 
         aliveCreatures.addAll(aliveHuman);
 
@@ -172,12 +174,14 @@ public class Field extends JPanel {
 
             int key = e.getKeyCode();
 
-            if (key == KeyEvent.VK_S) {
+            if (key == KeyEvent.VK_S && battleStart == false) {
+                battleStart = true;
                 ListIterator<Creature> listIterator = players.listIterator();
-
                 while (listIterator.hasNext()) {
                     Creature player = listIterator.next();
                     Thread thread = new Thread(player);
+                    //thread.setName(player.getImage().toString());
+                    //System.out.println(thread.getName());
                     threads.add(thread);
                     thread.start();
                 }
@@ -206,7 +210,7 @@ public class Field extends JPanel {
     }
 
     public void restartLevel() throws InterruptedException {
-
+        System.out.println("Start to clean the trash.");
         tiles.clear();
 
 
@@ -216,8 +220,8 @@ public class Field extends JPanel {
         aliveHuman.clear();
         aliveMonster.clear();
         aliveCreatures.clear();
-        //aliveCreatures.clear();
-        //Todo: fix the bug that restartLevel can't kill the threads
+
+        battleStart = false;
 
         System.out.println(Thread.activeCount());
 
