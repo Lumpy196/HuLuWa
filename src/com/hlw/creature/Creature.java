@@ -14,6 +14,12 @@ public class Creature extends Thing2D {
 
     private Grid grid;
 
+    private int health;
+
+    private int offense;
+
+    private boolean humanity;
+
     private volatile boolean threadIsAlive;
 
     public Creature(int axis_x, int axis_y, Field field) {
@@ -30,6 +36,30 @@ public class Creature extends Thing2D {
         threadIsAlive = true;
 
 
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getOffense() {
+        return offense;
+    }
+
+    public void setOffense(int offense) {
+        this.offense = offense;
+    }
+
+    public boolean isHumanity() {
+        return humanity;
+    }
+
+    public void setHumanity(boolean humanity) {
+        this.humanity = humanity;
     }
 
     public boolean threadIsAlive() {
@@ -75,6 +105,10 @@ public class Creature extends Thing2D {
                 this.setAxis_y(ny);
 
                 return true;
+            } else if (this.field.getGrid(nx, ny).getOccupier().isHumanity() != this.isHumanity()) {
+                attack(axis_x, axis_y);
+                return true;
+
             } else {
                 return false;
             }
@@ -82,8 +116,28 @@ public class Creature extends Thing2D {
 
     }
 
-    public void attack() {
+    public boolean attack(int axis_x, int axis_y) {
         //Todo: Rules for the methods that creatures use to attack each other.
+
+        int nx = axis_x + this.getAxis_x();
+        int ny = axis_y + this.getAxis_y();
+
+        Creature enemy = this.field.getGrid(nx, ny).getOccupier();
+
+        this.setHealth(this.getHealth() - enemy.getOffense());
+        enemy.setHealth(enemy.getHealth() - this.getOffense());
+
+        if (this.getHealth() <= 0) {
+            this.setThreadIsAlive(false);
+            this.killCreature();
+        }
+
+        if (enemy.getHealth() <= 0) {
+            this.setThreadIsAlive(false);
+            this.killCreature();
+        }
+
+        return true;
     }
 
     @Override
@@ -92,8 +146,8 @@ public class Creature extends Thing2D {
 
             Random random = new Random();
 
-            int goal_x = random.nextInt(5);
-            int goal_y = random.nextInt(5);
+            int goal_x = random.nextInt(6);
+            int goal_y = random.nextInt(6);
 
 
             this.move(goal_x, goal_y);

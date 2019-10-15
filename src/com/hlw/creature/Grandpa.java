@@ -9,5 +9,7 @@ public class Grandpa extends Human{
 		// TODO Auto-generated constructor stub
 
         this.setImage(this.getClass().getClassLoader().getResource("grandpa.png"));
+        this.setHealth(200);
+        this.setOffense(0);
 	}
 }

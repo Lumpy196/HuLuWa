@@ -61,6 +61,9 @@ public class HuLuWa extends Human {
 
 		URL location = this.getClass().getClassLoader().getResource(imageName);
 		this.setImage(location);
+
+        this.setHealth(300);
+        this.setOffense(100);
 	}
 
 

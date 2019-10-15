@@ -68,7 +68,7 @@ public class Field extends JPanel {
         return this.height;
     }
 
-    public void printPositon() {
+    public void TestPrintPositon() {
         for (int i = 0; i < aliveCreatures.size(); i++) {
             System.out.println(aliveCreatures.get(i).getClass()
                             + " x = " + aliveCreatures.get(i).getAxis_x()
@@ -80,7 +80,7 @@ public class Field extends JPanel {
         System.out.println();
     }
 
-    public void printGrids() {
+    public void TestPrintGrids() {
         int count = 0;
         for (int i = 0; i < grids.size(); i++) {
             ArrayList<Grid> gridcol = grids.get(i);
@@ -165,7 +165,7 @@ public class Field extends JPanel {
 
     }
 
-    public void buildWorld(Graphics g) {
+    public void paintWorld(Graphics g) {
 
         g.setColor(new Color(250, 240, 170));
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -190,15 +190,15 @@ public class Field extends JPanel {
             }
         }
 
-        printPositon();
-        printGrids();
+        TestPrintPositon();
+        TestPrintGrids();
         System.out.println();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        buildWorld(g);
+        paintWorld(g);
     }
 
     class TAdapter extends KeyAdapter {
