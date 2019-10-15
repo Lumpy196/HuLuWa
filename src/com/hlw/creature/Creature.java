@@ -21,11 +21,13 @@ public class Creature extends Thing2D {
 
         this.field = field;
 
-        threadIsAlive = true;
+        this.grid = this.field.getGrid(axis_x, axis_y);
 
-        this.field.getGrid(axis_x, axis_y).setOccupier(this);
+        this.grid.setOccupier(this);
 
         grid = this.field.getGrid(axis_x, axis_y);
+
+        threadIsAlive = true;
 
 
     }
@@ -40,6 +42,14 @@ public class Creature extends Thing2D {
 
     public void killCreature() {
         threadIsAlive = false;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
     }
 
     public boolean move(int axis_x, int axis_y) {
@@ -58,15 +68,12 @@ public class Creature extends Thing2D {
         synchronized (this.field.getGrid(nx, ny)) {
             if (this.field.getGrid(nx, ny).isEmptyOccupier()) {
 
-                this.field.getGrid(nx, ny).setOccupier(this);
-                this.field.getGrid(this.getAxis_x(), this.getAxis_y()).clearOccupier();
+                this.grid.clearOccupier();
+                this.grid = this.field.getGrid(nx, ny);
+                this.grid.setOccupier(this);
                 this.setAxis_x(nx);
                 this.setAxis_y(ny);
-                this.grid.setAxis_x(nx);
-                this.grid.setAxis_y(ny);
-                if (this instanceof HuLuWa) {
-                    //System.out.println(((HuLuWa) this).getColor() + ": x+" + axis_x + ", y+" + axis_y);
-                }
+
                 return true;
             } else {
                 return false;
@@ -88,13 +95,7 @@ public class Creature extends Thing2D {
             int goal_x = random.nextInt(5);
             int goal_y = random.nextInt(5);
 
-/*          goal_x = 0;
-            goal_y = 1;
-            if(this instanceof HuLuWa){
-                if(((HuLuWa) this).getColor() == HuLuWa.COLOR.RED){
-                    this.move(goal_x, goal_y);
-                }
-            }*/
+
             this.move(goal_x, goal_y);
 
             try {

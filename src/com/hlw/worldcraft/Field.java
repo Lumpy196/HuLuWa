@@ -68,6 +68,36 @@ public class Field extends JPanel {
         return this.height;
     }
 
+    public void printPositon() {
+        for (int i = 0; i < aliveCreatures.size(); i++) {
+            System.out.println(aliveCreatures.get(i).getClass()
+                            + " x = " + aliveCreatures.get(i).getAxis_x()
+                            + " y = " + aliveCreatures.get(i).getAxis_y()
+                            + " grid_x = " + aliveCreatures.get(i).getGrid().getAxis_x()
+                            + " grid_y = " + aliveCreatures.get(i).getGrid().getAxis_y()
+                    /*+ " grid_occupier = " + aliveCreatures.get(i).getGrid().getOccupier().getClass()*/);
+        }
+        System.out.println();
+    }
+
+    public void printGrids() {
+        int count = 0;
+        for (int i = 0; i < grids.size(); i++) {
+            ArrayList<Grid> gridcol = grids.get(i);
+            for (int j = 0; j < gridcol.size(); j++) {
+                if (gridcol.get(j).isEmptyOccupier()) {
+                    System.out.print("0 ");
+                } else {
+                    count++;
+                    System.out.print("1 ");
+                }
+            }
+
+            System.out.println();
+        }
+        System.out.println("count = " + count);
+    }
+
     public boolean killCreatures(Creature creature) {
         creature.killCreature();
         if (creature instanceof Human) {
@@ -123,15 +153,14 @@ public class Field extends JPanel {
             this.grids.add(gridCol);
         }
 
-        initCreatures();
-
         for (int axis_x = 0; axis_x < MAXSIZE; axis_x++) {
             for (int axis_y = 0; axis_y < MAXSIZE; axis_y++) {
                 tiles.add(new Tile(axis_x, axis_y));
             }
         }
 
-        //players.add(aliveHuman.get(0));
+        initCreatures();
+
         players = aliveCreatures;
 
     }
@@ -159,8 +188,11 @@ public class Field extends JPanel {
                 g.setColor(new Color(0, 0, 0));
                 g.drawString("Completed", 25, 20);
             }
-
         }
+
+        printPositon();
+        printGrids();
+        System.out.println();
     }
 
     @Override
