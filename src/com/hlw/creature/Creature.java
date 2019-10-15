@@ -23,6 +23,8 @@ public class Creature extends Thing2D {
 
         threadIsAlive = true;
 
+        this.field.getGrid(axis_x, axis_y).setOccupier(this);
+
         grid = this.field.getGrid(axis_x, axis_y);
 
 
@@ -86,6 +88,13 @@ public class Creature extends Thing2D {
             int goal_x = random.nextInt(5);
             int goal_y = random.nextInt(5);
 
+/*          goal_x = 0;
+            goal_y = 1;
+            if(this instanceof HuLuWa){
+                if(((HuLuWa) this).getColor() == HuLuWa.COLOR.RED){
+                    this.move(goal_x, goal_y);
+                }
+            }*/
             this.move(goal_x, goal_y);
 
             try {

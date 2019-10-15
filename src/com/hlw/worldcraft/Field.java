@@ -83,27 +83,31 @@ public class Field extends JPanel {
 
     public final void initCreatures() {
 
-        aliveHuman.add(new HuLuWa(0, 1, HuLuWa.COLOR.RED, this));
-        aliveHuman.add(new HuLuWa(0, 2, HuLuWa.COLOR.ORANGE, this));
-        aliveHuman.add(new HuLuWa(2, 3, HuLuWa.COLOR.YELLOW, this));
-        aliveHuman.add(new HuLuWa(0, 3, HuLuWa.COLOR.GREEN, this));
-        aliveHuman.add(new HuLuWa(0, 4, HuLuWa.COLOR.CYAN, this));
-        aliveHuman.add(new HuLuWa(0, 5, HuLuWa.COLOR.BLUE, this));
-        aliveHuman.add(new HuLuWa(10, 5, HuLuWa.COLOR.PURPLE, this));
+        aliveHuman.add(new HuLuWa(2, 4, HuLuWa.COLOR.RED, this));
+        aliveHuman.add(new HuLuWa(3, 5, HuLuWa.COLOR.ORANGE, this));
+        aliveHuman.add(new HuLuWa(4, 6, HuLuWa.COLOR.YELLOW, this));
+        aliveHuman.add(new HuLuWa(5, 7, HuLuWa.COLOR.GREEN, this));
+        aliveHuman.add(new HuLuWa(4, 8, HuLuWa.COLOR.CYAN, this));
+        aliveHuman.add(new HuLuWa(3, 9, HuLuWa.COLOR.BLUE, this));
+        aliveHuman.add(new HuLuWa(2, 10, HuLuWa.COLOR.PURPLE, this));
 
-        aliveHuman.add(new Grandpa(1, 1, this));
+        aliveHuman.add(new Grandpa(2, 7, this));
 
         aliveCreatures.addAll(aliveHuman);
 
-        aliveMonster.add(new Goblin(6, 1, this));
-        aliveMonster.add(new Goblin(6, 2, this));
-        aliveMonster.add(new Goblin(6, 3, this));
-        aliveMonster.add(new Goblin(6, 4, this));
-        aliveMonster.add(new Goblin(6, 5, this));
-        aliveMonster.add(new Goblin(6, 6, this));
+        aliveMonster.add(new Goblin(11, 4, this));
+        aliveMonster.add(new Goblin(11, 5, this));
+        aliveMonster.add(new Goblin(11, 6, this));
+        aliveMonster.add(new Goblin(11, 7, this));
+        aliveMonster.add(new Goblin(11, 8, this));
+        aliveMonster.add(new Goblin(11, 9, this));
+        aliveMonster.add(new Goblin(11, 10, this));
+        aliveMonster.add(new Goblin(12, 5, this));
+        aliveMonster.add(new Goblin(12, 7, this));
+        aliveMonster.add(new Goblin(12, 9, this));
 
-        aliveMonster.add(new Snake(5, 1, this));
-        aliveMonster.add(new Scorpion(5, 2, this));
+        aliveMonster.add(new Snake(13, 6, this));
+        aliveMonster.add(new Scorpion(13, 8, this));
 
         aliveCreatures.addAll(aliveMonster);
 
@@ -127,7 +131,8 @@ public class Field extends JPanel {
             }
         }
 
-        players = aliveHuman;
+        //players.add(aliveHuman.get(0));
+        players = aliveCreatures;
 
     }
 
@@ -138,6 +143,7 @@ public class Field extends JPanel {
 
         ArrayList world = new ArrayList();
         world.addAll(tiles);
+
         world.addAll(players);
 
         for (int i = 0; i < world.size(); i++) {
@@ -211,7 +217,8 @@ public class Field extends JPanel {
 
     public void restartLevel() throws InterruptedException {
         System.out.println("Start to clean the trash.");
-        tiles.clear();
+
+        //tiles.clear();
 
 
         killThread();
@@ -220,6 +227,7 @@ public class Field extends JPanel {
         aliveHuman.clear();
         aliveMonster.clear();
         aliveCreatures.clear();
+        grids.clear();
 
         battleStart = false;
 
