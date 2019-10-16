@@ -10,6 +10,7 @@ public class Scorpion extends Monster{
         this.setImage(this.getClass().getClassLoader().getResource("scorpion.png"));
         this.setHealth(1000);
         this.setOffense(150);
+        this.setCreatureName("scorpion");
 	}
 	
 }

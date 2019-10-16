@@ -64,6 +64,7 @@ public class HuLuWa extends Human {
 
         this.setHealth(300);
         this.setOffense(100);
+		this.setCreatureName("HuLuWa_" + this.color);
 	}
 
 

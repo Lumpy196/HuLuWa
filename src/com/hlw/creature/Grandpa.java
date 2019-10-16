@@ -11,5 +11,6 @@ public class Grandpa extends Human{
         this.setImage(this.getClass().getClassLoader().getResource("grandpa.png"));
         this.setHealth(200);
         this.setOffense(0);
+        this.setCreatureName("grandpa");
 	}
 }

@@ -10,6 +10,7 @@ public class Snake extends Monster{
         this.setImage(this.getClass().getClassLoader().getResource("snake.png"));
         this.setHealth(800);
         this.setOffense(100);
+        this.setCreatureName("snake");
 	}
 	
 }

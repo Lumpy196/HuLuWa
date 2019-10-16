@@ -11,7 +11,9 @@ public class Goblin extends Monster{
         this.setImage(this.getClass().getClassLoader().getResource("goblin.png"));
         this.setHealth(100);
         this.setOffense(20);
-	}
-	
+        this.setCreatureName("goblin");
+    }
+
+
 	
 }

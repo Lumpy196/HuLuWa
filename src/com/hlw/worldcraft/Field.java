@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 
 public class Field extends JPanel {
 
-    private static final int OFFSET = 20;
-    private static final int SPACE = 20;
+    private static final int OFFSET = 30;
+    private static final int SPACE = 20 + 2;
     private static final int MAXSIZE = 11;
 
     private boolean battleStart = false;
@@ -32,7 +32,7 @@ public class Field extends JPanel {
 
     private ArrayList<Creature> players = new ArrayList<>();
 
-    private ArrayList<Thread> threads = new ArrayList<>();
+    //private ArrayList<Thread> threads = new ArrayList<>();
 
     private int weight = OFFSET + MAXSIZE * SPACE;
     private int height = OFFSET + MAXSIZE * SPACE;
@@ -167,7 +167,7 @@ public class Field extends JPanel {
             if (item instanceof Creature) {
                 g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET + 2, item.getAxis_y() * SPACE + OFFSET + 2, this);
             } else {
-                g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET, item.getAxis_y() * SPACE + OFFSET, this);
+                g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET + 1, item.getAxis_y() * SPACE + OFFSET + 1, this);
             }
 
         }
@@ -177,19 +177,19 @@ public class Field extends JPanel {
         }
 
         if (completed) {
+            killThread();
             g.setColor(new Color(0, 0, 0));
-            g.drawString("Completed", 25, 20);
+            g.drawString("Completed", OFFSET, OFFSET);
         }
 
-        TestUtils.TestPrintPositon(this);
-        TestUtils.TestPrintGrids(this);
-        System.out.println();
+        //TestUtils.TestPrintPositon(this);
+        //TestUtils.TestPrintGrids(this);
+        //System.out.println();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
         paintWorld(g);
 
     }
@@ -199,9 +199,11 @@ public class Field extends JPanel {
         @Override
         public void keyPressed(KeyEvent e) {
 
+/*
             if (completed) {
                 return;
             }
+*/
 
             int key = e.getKeyCode();
 
@@ -210,11 +212,7 @@ public class Field extends JPanel {
                 ListIterator<Creature> listIterator = players.listIterator();
                 while (listIterator.hasNext()) {
                     Creature player = listIterator.next();
-                    Thread thread = new Thread(player);
-                    //thread.setName(player.getImage().toString());
-                    //System.out.println(thread.getName());
-                    threads.add(thread);
-                    thread.start();
+                    new Thread(player).start();
                 }
 
             } else if (key == KeyEvent.VK_R) {
@@ -232,15 +230,15 @@ public class Field extends JPanel {
         }
     }
 
-    public void killThread() throws InterruptedException {
+    public void killThread() {
 
         ListIterator<Creature> listIterator = players.listIterator();
         while (listIterator.hasNext()) {
             Creature player = listIterator.next();
-            player.setThreadIsAlive(false);
-
+            //player.setThreadIsAlive(false);
+            player.killCreature();
         }
-        threads.clear();
+
     }
 
     public void restartLevel() throws InterruptedException {
@@ -248,9 +246,8 @@ public class Field extends JPanel {
 
         //tiles.clear();
 
-        for (int i = 0; i < aliveCreatures.size(); i++) {
-            this.killCreatures(aliveCreatures.get(i));
-        }
+
+        killThread();
 
         players.clear();
         aliveHuman.clear();

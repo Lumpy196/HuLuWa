@@ -20,6 +20,8 @@ public class Creature extends Thing2D {
 
     private boolean humanity;
 
+    private String creatureName;
+
     private volatile boolean threadIsAlive;
 
     public Creature(int axis_x, int axis_y, Field field) {
@@ -36,6 +38,22 @@ public class Creature extends Thing2D {
         threadIsAlive = true;
 
 
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
     }
 
     public int getHealth() {
@@ -62,6 +80,14 @@ public class Creature extends Thing2D {
         this.humanity = humanity;
     }
 
+    public String getCreatureName() {
+        return creatureName;
+    }
+
+    public void setCreatureName(String creatureName) {
+        this.creatureName = creatureName;
+    }
+
     public boolean threadIsAlive() {
         return threadIsAlive;
     }
@@ -71,16 +97,9 @@ public class Creature extends Thing2D {
     }
 
     public void killCreature() {
-        threadIsAlive = false;
+        this.threadIsAlive = false;
     }
 
-    public Grid getGrid() {
-        return grid;
-    }
-
-    public void setGrid(Grid grid) {
-        this.grid = grid;
-    }
 
     public boolean move(int distance_x, int distance_y) {
         //Todo: Rules for the Routes of the creatures
@@ -116,7 +135,7 @@ public class Creature extends Thing2D {
             }
         } catch (NullPointerException e) {
             System.out.println("fuck me");
-            System.out.println(this.field.getGrid(goal_x, goal_y).getOccupier());
+            System.out.println(this.field.getGrid(goal_x, goal_y).getOccupier().getClass());
             System.out.println(this);
             e.printStackTrace();
             return false;
