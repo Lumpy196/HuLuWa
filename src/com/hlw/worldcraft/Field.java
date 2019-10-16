@@ -151,6 +151,7 @@ public class Field extends JPanel {
 
     }
 
+
     public void paintWorld(Graphics g) {
 
         g.setColor(new Color(250, 240, 170));
@@ -171,6 +172,7 @@ public class Field extends JPanel {
             }
 
         }
+
 
         if (aliveHuman.size() == 0 || aliveMonster.size() == 0) {
             completed = true;

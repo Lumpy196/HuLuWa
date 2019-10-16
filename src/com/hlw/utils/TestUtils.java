@@ -10,6 +10,7 @@ public class TestUtils {
     public static void TestPrintPositon(Field field) {
         for (int i = 0; i < field.getAliveCreatures().size(); i++) {
             System.out.println(field.getAliveCreatures().get(i).getClass()
+                    + " CreatureName = " + field.getAliveCreatures().get(i).getCreatureName()
                     + " x = " + field.getAliveCreatures().get(i).getAxis_x()
                     + " y = " + field.getAliveCreatures().get(i).getAxis_y()
                     + " grid_x = " + field.getAliveCreatures().get(i).getGrid().getAxis_x()

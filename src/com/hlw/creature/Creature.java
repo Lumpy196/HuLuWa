@@ -118,6 +118,10 @@ public class Creature extends Thing2D {
             synchronized (this.field.getGrid(goal_x, goal_y)) {
                 if (this.field.getGrid(goal_x, goal_y).isEmptyOccupier()) {
 
+                    System.out.println("Creature " + this.getCreatureName() + " moved from ("
+                            + this.getAxis_x() + ", " + this.getAxis_y() + ") to ("
+                            + goal_x + ", " + goal_y + " )");
+
                     this.grid.clearOccupier();
                     this.grid = this.field.getGrid(goal_x, goal_y);
                     this.grid.setOccupier(this);
@@ -148,11 +152,17 @@ public class Creature extends Thing2D {
 
         Creature enemy = this.field.getGrid(goal_x, goal_y).getOccupier();
 
+        System.out.println("Creature " + this.getCreatureName()
+                + " attacked " + enemy.getCreatureName()
+                + "from (" + this.getAxis_x() + ", " + this.getAxis_y()
+                + ") to (" + goal_x + ", " + goal_y + " )");
+
         this.setHealth(this.getHealth() - enemy.getOffense());
         enemy.setHealth(enemy.getHealth() - this.getOffense());
 
         if (this.getHealth() <= 0) {
             this.field.killCreatures(this);
+            System.out.println("Enemy ");
         }
 
         if (enemy.getHealth() <= 0) {
@@ -183,7 +193,7 @@ public class Creature extends Thing2D {
         }
         try {
             sleep(100);
-            System.out.println("thread " + this.getName() + " is dead");
+            System.out.println("Creature " + this.getCreatureName() + " is dead");
             this.grid.clearOccupier();
         } catch (InterruptedException e) {
             e.printStackTrace();
