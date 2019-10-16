@@ -82,61 +82,63 @@ public class Creature extends Thing2D {
         this.grid = grid;
     }
 
-    public boolean move(int axis_x, int axis_y) {
+    public boolean move(int distance_x, int distance_y) {
         //Todo: Rules for the Routes of the creatures
-        int nx = this.getAxis_x() + axis_x;
+        int goal_x = this.getAxis_x() + distance_x;
 
-        if (nx >= this.field.getMaxsize() || nx < 0) {
-            nx = this.getAxis_x() - 2 * axis_x;
+        if (goal_x >= this.field.getMaxsize() || goal_x < 0) {
+            goal_x = this.getAxis_x() - distance_x;
         }
 
-        int ny = this.getAxis_y() + axis_y;
+        int goal_y = this.getAxis_y() + distance_y;
 
-        if (ny >= this.field.getMaxsize() || ny < 0) {
-            ny = this.getAxis_y() - 2 * axis_y;
+        if (goal_y >= this.field.getMaxsize() || goal_y < 0) {
+            goal_y = this.getAxis_y() - distance_y;
         }
-        synchronized (this.field.getGrid(nx, ny)) {
-            if (this.field.getGrid(nx, ny).isEmptyOccupier()) {
+        try {
+            synchronized (this.field.getGrid(goal_x, goal_y)) {
+                if (this.field.getGrid(goal_x, goal_y).isEmptyOccupier()) {
 
-                this.grid.clearOccupier();
-                this.grid = this.field.getGrid(nx, ny);
-                this.grid.setOccupier(this);
-                this.setAxis_x(nx);
-                this.setAxis_y(ny);
+                    this.grid.clearOccupier();
+                    this.grid = this.field.getGrid(goal_x, goal_y);
+                    this.grid.setOccupier(this);
+                    this.setAxis_x(goal_x);
+                    this.setAxis_y(goal_y);
 
-                return true;
-            } else if (this.field.getGrid(nx, ny).getOccupier().isHumanity() != this.isHumanity()) {
-                attack(axis_x, axis_y);
-                return true;
+                    return true;
+                } else if (this.field.getGrid(goal_x, goal_y).getOccupier().isHumanity() != this.isHumanity()) {
+                    attack(goal_x, goal_y);
+                    return true;
 
-            } else {
-                return false;
+                } else {
+                    return false;
+                }
             }
+        } catch (NullPointerException e) {
+            System.out.println("fuck me");
+            System.out.println(this.field.getGrid(goal_x, goal_y).getOccupier());
+            System.out.println(this);
+            e.printStackTrace();
+            return false;
         }
 
     }
 
-    public boolean attack(int axis_x, int axis_y) {
+    public boolean attack(int goal_x, int goal_y) {
         //Todo: Rules for the methods that creatures use to attack each other.
 
-        int nx = axis_x + this.getAxis_x();
-        int ny = axis_y + this.getAxis_y();
-
-        Creature enemy = this.field.getGrid(nx, ny).getOccupier();
+        Creature enemy = this.field.getGrid(goal_x, goal_y).getOccupier();
 
         this.setHealth(this.getHealth() - enemy.getOffense());
         enemy.setHealth(enemy.getHealth() - this.getOffense());
 
         if (this.getHealth() <= 0) {
-            this.setThreadIsAlive(false);
-            this.killCreature();
+            this.field.killCreatures(this);
         }
 
         if (enemy.getHealth() <= 0) {
-            this.setThreadIsAlive(false);
-            this.killCreature();
+            this.field.killCreatures(enemy);
         }
-
         return true;
     }
 
@@ -146,11 +148,10 @@ public class Creature extends Thing2D {
 
             Random random = new Random();
 
-            int goal_x = random.nextInt(6);
-            int goal_y = random.nextInt(6);
+            int distance_x = random.nextInt(6) - 3;
+            int distance_y = random.nextInt(6) - 3;
 
-
-            this.move(goal_x, goal_y);
+            this.move(distance_x, distance_y);
 
             try {
                 Thread.sleep(random.nextInt(100) + 200);

@@ -3,6 +3,7 @@ package com.hlw.worldcraft;
 
 import com.hlw.Thing2D;
 import com.hlw.creature.*;
+import com.hlw.utils.TestUtils;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,9 +17,11 @@ public class Field extends JPanel {
 
     private static final int OFFSET = 20;
     private static final int SPACE = 20;
-    private static final int MAXSIZE = 15;
+    private static final int MAXSIZE = 11;
 
     private boolean battleStart = false;
+
+    private int rounds = 0;
 
     private ArrayList tiles = new ArrayList();
     private ArrayList<Creature> aliveHuman = new ArrayList<Creature>();
@@ -68,34 +71,16 @@ public class Field extends JPanel {
         return this.height;
     }
 
-    public void TestPrintPositon() {
-        for (int i = 0; i < aliveCreatures.size(); i++) {
-            System.out.println(aliveCreatures.get(i).getClass()
-                            + " x = " + aliveCreatures.get(i).getAxis_x()
-                            + " y = " + aliveCreatures.get(i).getAxis_y()
-                            + " grid_x = " + aliveCreatures.get(i).getGrid().getAxis_x()
-                            + " grid_y = " + aliveCreatures.get(i).getGrid().getAxis_y()
-                    /*+ " grid_occupier = " + aliveCreatures.get(i).getGrid().getOccupier().getClass()*/);
-        }
-        System.out.println();
+    public ArrayList<ArrayList<Grid>> getGrids() {
+        return grids;
     }
 
-    public void TestPrintGrids() {
-        int count = 0;
-        for (int i = 0; i < grids.size(); i++) {
-            ArrayList<Grid> gridcol = grids.get(i);
-            for (int j = 0; j < gridcol.size(); j++) {
-                if (gridcol.get(j).isEmptyOccupier()) {
-                    System.out.print("0 ");
-                } else {
-                    count++;
-                    System.out.print("1 ");
-                }
-            }
+    public void setGrids(ArrayList<ArrayList<Grid>> grids) {
+        this.grids = grids;
+    }
 
-            System.out.println();
-        }
-        System.out.println("count = " + count);
+    public ArrayList<Creature> getAliveCreatures() {
+        return aliveCreatures;
     }
 
     public boolean killCreatures(Creature creature) {
@@ -108,36 +93,37 @@ public class Field extends JPanel {
             return false;
         }
         aliveCreatures.remove(creature);
+        players.remove(creature);
         return true;
     }
 
     public final void initCreatures() {
 
-        aliveHuman.add(new HuLuWa(2, 4, HuLuWa.COLOR.RED, this));
-        aliveHuman.add(new HuLuWa(3, 5, HuLuWa.COLOR.ORANGE, this));
-        aliveHuman.add(new HuLuWa(4, 6, HuLuWa.COLOR.YELLOW, this));
-        aliveHuman.add(new HuLuWa(5, 7, HuLuWa.COLOR.GREEN, this));
-        aliveHuman.add(new HuLuWa(4, 8, HuLuWa.COLOR.CYAN, this));
-        aliveHuman.add(new HuLuWa(3, 9, HuLuWa.COLOR.BLUE, this));
-        aliveHuman.add(new HuLuWa(2, 10, HuLuWa.COLOR.PURPLE, this));
+        aliveHuman.add(new HuLuWa(2, 2, HuLuWa.COLOR.RED, this));
+        aliveHuman.add(new HuLuWa(3, 3, HuLuWa.COLOR.ORANGE, this));
+        aliveHuman.add(new HuLuWa(4, 4, HuLuWa.COLOR.YELLOW, this));
+        aliveHuman.add(new HuLuWa(5, 5, HuLuWa.COLOR.GREEN, this));
+        aliveHuman.add(new HuLuWa(4, 6, HuLuWa.COLOR.CYAN, this));
+        aliveHuman.add(new HuLuWa(3, 7, HuLuWa.COLOR.BLUE, this));
+        aliveHuman.add(new HuLuWa(2, 8, HuLuWa.COLOR.PURPLE, this));
 
-        aliveHuman.add(new Grandpa(2, 7, this));
+        aliveHuman.add(new Grandpa(2, 5, this));
 
         aliveCreatures.addAll(aliveHuman);
 
-        aliveMonster.add(new Goblin(11, 4, this));
-        aliveMonster.add(new Goblin(11, 5, this));
-        aliveMonster.add(new Goblin(11, 6, this));
-        aliveMonster.add(new Goblin(11, 7, this));
-        aliveMonster.add(new Goblin(11, 8, this));
-        aliveMonster.add(new Goblin(11, 9, this));
-        aliveMonster.add(new Goblin(11, 10, this));
-        aliveMonster.add(new Goblin(12, 5, this));
-        aliveMonster.add(new Goblin(12, 7, this));
-        aliveMonster.add(new Goblin(12, 9, this));
+        aliveMonster.add(new Goblin(7, 2, this));
+        aliveMonster.add(new Goblin(7, 3, this));
+        aliveMonster.add(new Goblin(7, 4, this));
+        aliveMonster.add(new Goblin(7, 5, this));
+        aliveMonster.add(new Goblin(7, 6, this));
+        aliveMonster.add(new Goblin(7, 7, this));
+        aliveMonster.add(new Goblin(7, 8, this));
+        aliveMonster.add(new Goblin(8, 3, this));
+        aliveMonster.add(new Goblin(8, 5, this));
+        aliveMonster.add(new Goblin(8, 7, this));
 
-        aliveMonster.add(new Snake(13, 6, this));
-        aliveMonster.add(new Scorpion(13, 8, this));
+        aliveMonster.add(new Snake(9, 4, this));
+        aliveMonster.add(new Scorpion(9, 6, this));
 
         aliveCreatures.addAll(aliveMonster);
 
@@ -184,21 +170,28 @@ public class Field extends JPanel {
                 g.drawImage(item.getImage(), item.getAxis_x() * SPACE + OFFSET, item.getAxis_y() * SPACE + OFFSET, this);
             }
 
-            if (completed) {
-                g.setColor(new Color(0, 0, 0));
-                g.drawString("Completed", 25, 20);
-            }
         }
 
-        TestPrintPositon();
-        TestPrintGrids();
+        if (aliveHuman.size() == 0 || aliveMonster.size() == 0) {
+            completed = true;
+        }
+
+        if (completed) {
+            g.setColor(new Color(0, 0, 0));
+            g.drawString("Completed", 25, 20);
+        }
+
+        TestUtils.TestPrintPositon(this);
+        TestUtils.TestPrintGrids(this);
         System.out.println();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+
         paintWorld(g);
+
     }
 
     class TAdapter extends KeyAdapter {
@@ -232,7 +225,10 @@ public class Field extends JPanel {
                 }
             }
 
-            repaint();
+            if (!completed) {
+                repaint();
+            }
+
         }
     }
 
@@ -252,8 +248,9 @@ public class Field extends JPanel {
 
         //tiles.clear();
 
-
-        killThread();
+        for (int i = 0; i < aliveCreatures.size(); i++) {
+            this.killCreatures(aliveCreatures.get(i));
+        }
 
         players.clear();
         aliveHuman.clear();
