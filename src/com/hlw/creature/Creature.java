@@ -120,7 +120,7 @@ public class Creature extends Thing2D {
 
                     System.out.println("Creature " + this.getCreatureName() + " moved from ("
                             + this.getAxis_x() + ", " + this.getAxis_y() + ") to ("
-                            + goal_x + ", " + goal_y + " )");
+                            + goal_x + ", " + goal_y + ")");
 
                     this.grid.clearOccupier();
                     this.grid = this.field.getGrid(goal_x, goal_y);
@@ -154,19 +154,20 @@ public class Creature extends Thing2D {
 
         System.out.println("Creature " + this.getCreatureName()
                 + " attacked " + enemy.getCreatureName()
-                + "from (" + this.getAxis_x() + ", " + this.getAxis_y()
-                + ") to (" + goal_x + ", " + goal_y + " )");
+                + " from (" + this.getAxis_x() + ", " + this.getAxis_y()
+                + ") to (" + goal_x + ", " + goal_y + ")");
 
         this.setHealth(this.getHealth() - enemy.getOffense());
         enemy.setHealth(enemy.getHealth() - this.getOffense());
 
         if (this.getHealth() <= 0) {
             this.field.killCreatures(this);
-            System.out.println("Enemy ");
+            System.out.println("Creature " + enemy.getCreatureName() + " killed " + this.getCreatureName());
         }
 
         if (enemy.getHealth() <= 0) {
             this.field.killCreatures(enemy);
+            System.out.println("Creature " + this.getCreatureName() + " retaliated and killed " + enemy.getCreatureName());
         }
         return true;
     }

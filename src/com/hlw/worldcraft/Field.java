@@ -179,9 +179,19 @@ public class Field extends JPanel {
         }
 
         if (completed) {
+
+
+            if (aliveHuman.size() != 0) {
+                g.setColor(new Color(0, 100, 0));
+                g.drawString("Humans win! ", OFFSET, OFFSET);
+            } else if (aliveMonster.size() != 0) {
+                g.setColor(new Color(255, 0, 0));
+                g.drawString("Monsters win! ", OFFSET, OFFSET);
+            } else {
+                g.setColor(new Color(0, 0, 0));
+                g.drawString("It's a draw!", OFFSET, OFFSET);
+            }
             killThread();
-            g.setColor(new Color(0, 0, 0));
-            g.drawString("Completed", OFFSET, OFFSET);
         }
 
         //TestUtils.TestPrintPositon(this);
